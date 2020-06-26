@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { getMagazineById } from "../../data/MagazineRepository";
 import { useTheme } from "@react-navigation/native";
-import md5 from "react-native-md5";
+import md5 from "md5";
 
 class DetailsForm extends Component {
   constructor(props) {
@@ -24,7 +24,8 @@ class DetailsForm extends Component {
 
   async componentDidMount() {
     const response = await getMagazineById(
-      md5.str_md5( this.state.nazwisko + this.state.imie)
+      md5(this.state.nazwisko + this.state.imie)
+      // '9ed639060a2a8f6cb42fef4cd7767c02'
     );
     await this.setState({ magazine: response, isLoading: false });
   }
